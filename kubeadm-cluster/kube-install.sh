@@ -76,34 +76,10 @@ containerd config default | sudo tee /etc/containerd/config.toml
 sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' /etc/containerd/config.toml 
 service containerd restart
 service kubelet restart
-# containerd config default | sudo tee /etc/containerd/config.toml
-# sudo systemctl restart containerd
 systemctl daemon-reload
 systemctl restart containerd.service
 systemctl start docker
 }
-
-
-# sudo systemctl daemon-reload 
-# sudo systemctl enable docker
-
-# sed -i 's/plugins.cri.systemd_cgroup = false/plugins.cri.systemd_cgroup = true/' /etc/containerd/config.toml
-# sudo systemctl restart containerd
-
-# configure systemd group driver
-# configure_cgroup () 
-# {
-#     cat <<EOF | sudo tee -a /etc/containerd/config.toml
-# [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-# [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-# SystemdCgroup = true
-# EOF
-# }
-
-
-# sudo sed -i 's/plugins.cri.systemd_cgroup = false/plugins.cri.systemd_cgroup = true/' /etc/containerd/config.toml
-
-# sudo sed -i 's/^disabled_plugins \=/\#disabled_plugins \=/g' /etc/containerd/config.toml
 
 
 #enable CRI plugins
@@ -116,15 +92,9 @@ sudo systemctl restart containerd
 }
 
 
-# containerd config default | tee /etc/containerd/config.toml
-# sed -i ‘s/SystemdCgroup = false/SystemdCgroup = true/g’ /etc/containerd/config.toml 
-# service containerd restart
-# service kubelet restart
-
 install_packages
 configure_hosts
 disable_swap
 configure_sysctl
 install_containerd
-# configure_cgroup
 enable_plugins
